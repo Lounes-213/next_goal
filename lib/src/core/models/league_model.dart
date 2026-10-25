@@ -1,0 +1,29 @@
+import 'package:next_goal/src/core/models/country_model.dart';
+import 'package:next_goal/src/core/constants/app_constants.dart';
+
+import '../domain/entities/league.dart';
+
+/// Represents the league model entity/model.
+class LeagueModel extends League {
+  const LeagueModel({
+    required super.id,
+    required super.name,
+    required super.logo,
+    super.country,
+    super.color,
+  });
+
+  factory LeagueModel.fromJson(
+    Map<String, dynamic> json, {
+    CountryModel? country,
+  }) {
+    final id = json['id'];
+    return LeagueModel(
+      id: id,
+      name: json['name'],
+      logo: AppConstants.competitionImage(id),
+      country: country,
+      color: json['color'],
+    );
+  }
+}
